@@ -1,0 +1,26 @@
+server.port: 8761
+spring:
+  profiles:
+    active: "dev"
+  application:
+    name: discovery-server
+
+---
+spring:
+  profiles: dev
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+
+
+---
+
+spring:
+  profiles: prod
+eureka:
+  instance:
+    hostname: "${HOSTNAME}.eureka"
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER_ADDRESS}

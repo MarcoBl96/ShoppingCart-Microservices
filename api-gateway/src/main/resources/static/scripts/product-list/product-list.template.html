@@ -1,0 +1,49 @@
+<h2>Product Management</h2>
+<p>The List of Products in our Database</p>
+
+<form onsubmit="javascript:void(0)" style="max-width: 20em; margin-top: 2em;">
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search Filter" ng-model="$ctrl.query" />
+    </div>
+</form>
+
+
+<table class="table table-hover" id="productList">
+    <thead>
+    <tr>
+        <!-- <th>Screen-Shot</th> -->
+        <th>Product Id</th>
+        <th>Category</th>
+        <th>Product Name</th>
+        <th>Products Price</th>
+        <th>Stock Unit</th>
+        <th>Description</th>
+        <th>Manufacturer</th>
+        <th>View <security:authorize access="hasAnyRole('ROLE_USER')">
+            / Add to Cart
+        </security:authorize> <!-- 					views only to the admin --> <security:authorize
+                access="hasAnyRole('ROLE_ADMIN')">
+            /Edit/Delete
+        </security:authorize>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="product in $ctrl.products | filter:$ctrl.query track by product.productId">
+
+        <td>{{product.productId}}</td>
+        <td>{{product.productCategory}}</td>
+        <td>{{product.productName}}</td>
+        <td>{{product.productPrice}}</td>
+        <td>{{product.unitStock}}</td>
+        <td style="width: 180px">{{product.productDescription}}</td>
+        <td>{{product.productManufacturer}}</td>
+        <td>
+            <a ui-sref="productDetails({productId: product.productId})" class="btn btn-info" role="button"> <span class="glyphicon glyphicon-info-sign"></span></a>
+            <a ng-click="addToCart(product)" class="btn btn-primary" style="margin-left: 5px"> <span class="glyphicon glyphicon-shopping-cart"></span></a>
+            <a ui-sref="productEdit({productId: product.productId})" class="btn btn-success" style="margin-left: 5px"> <span class="glyphicon glyphicon-edit"></span></a>
+            <a ng-click="delete(product.productId)" class="btn btn-danger" style="margin-left: 5px"> <span class="glyphicon glyphicon-trash"></span></a>
+        </td>
+    </tr>
+    </tbody>
+</table>

@@ -1,0 +1,56 @@
+server:
+  port: 8081
+
+spring:
+  profiles:
+    active: "dev"
+  application:
+    name: product-service
+  datasource:
+    url: jdbc:mariadb://localhost:3306/shoppingcart_test
+    username: root
+    password: password
+    driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+---
+
+spring:
+  profiles: dev
+eureka:
+  instance:
+    # Leave prefer ip address to allow the gateway inside the kubernetes cluster to find this service by it's pod ip
+    preferIpAddress: true
+    # The hostname of the service, to register the pod and turn it easier for the gateway to find it
+    # For deploying eureka clients in Kubernetes you need to set the hostname as the same name of the service
+    hostname: product-service
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+
+logging.level.org.springframework.web: DEBUG
+logging.level.org.springframework.datasource: DEBUG
+spring.jpa.show-sql: true
+spring.jpa.properties.hibernate.format_sql: true
+logging.level.org.hibernate.SQL: DEBUG
+---
+
+spring:
+  profiles: prod
+  datasource:
+    url: ${MARIADB_SERVER_ADDRESS}
+eureka:
+  instance:
+    # Leave prefer ip address to allow the gateway inside the kubernetes cluster to find this service by it's pod ip
+    preferIpAddress: true
+    # The hostname of the service, to register the pod and turn it easier for the gateway to find it
+    hostname: product-service
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://eureka-0.eureka.default.svc.cluster.local:8761/eureka,http://eureka-1.eureka.default.svc.cluster.local:8761/eureka,http://eureka-2.eureka.default.svc.cluster.local:8761/eureka

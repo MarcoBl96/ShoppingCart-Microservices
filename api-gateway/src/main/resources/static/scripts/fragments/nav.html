@@ -1,0 +1,67 @@
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <link rel="icon" type="image/x-icon" href="/resource/images/favicon1.png"/>
+    <link type="text/css" rel="stylesheet" href="/resource/bootstrap/css/bootstrap.min.css" />
+    <script src="/resource/js/jquery.js"></script>
+    <script src="/resource/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/resource/css/overall.css"/>
+    <style type="text/css">
+[ng\:cloak], [ng-cloak], .ng-cloak {
+	display: none !important;
+}
+</style>
+</head>
+<body ng-app="shoppingCartApp" ng-cloak class="ng-cloak">
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid" >
+
+        <div class="nav navbar">
+            <img class="navbar-brand"
+                 src="/resource/images/shopieasy-logo.png"
+                 ui-sref="welcome" width="200px" height="100px"
+            alt="logo-image"></img>
+        </div>
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#myNavbar">
+                <span class="icon-bar"></span> <span class="icon-bar"></span> <span
+                    class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" ui-sref="welcome">ShopIeasy</a>
+        </div>
+        <div ng-controller="layoutNavController" class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li><a ui-sref="welcome">Home</a></li>
+                <li><a ui-sref="productList">Product List</a></li>
+                <li><a ui-sref="aboutus">About Us</a></li>>
+                <li><a ui-sref="contactus">Contact Us</a></li>
+                <li><a ui-sref="productNew">Add Product</a></li>
+            </ul>
+
+            <ul ng-show="authenticated" class="nav navbar-nav navbar-right">
+                <li><a ui-sref="welcome"><span
+                            class="glyphicon glyphicon-shopping-user"></span>Welcome..{{username}}</a></li>
+
+                <li><a ui-sref="cartForm"><span
+                                class="glyphicon glyphicon-shopping-cart"></span>Cart</a></li>
+
+                <li><a href="" ng-click="logout()"><span
+                            class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+            </ul>
+            <ul ng-show="!authenticated" class="nav navbar-nav navbar-right">
+                    <li><a ui-sref="login"><span
+                            class="glyphicon glyphicon-shopping-cart"></span>My Cart</a></li>
+                    <li><a ui-sref="userNew"><span
+                        class="glyphicon glyphicon-log-user"></span> SignUp</a></li>
+                    <li><a ui-sref="login"><span
+                            class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+</body>

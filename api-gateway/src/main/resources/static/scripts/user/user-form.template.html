@@ -1,0 +1,147 @@
+<html>
+<body>
+<div class="container" style="margin-bottom: 19px">
+    <h1 class="well">Register Here !</h1>
+    <div class="col-lg-12 well">
+        <div class="row">
+
+            <!--  RegisterServlet  form -->
+            <form ng-submit="$ctrl.submitUserForm()" style="max-width: 25em;">
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div>
+                            <center>User Details</center>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label path="firstName">First Name</label>
+                            <input type="text" placeholder="Enter First Name.."
+                                        class="form-control" path="firstName" ng-model="$ctrl.user.firstName"></input>
+                            <errors path="firstName"></errors>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label path="lastName">Last Name</label>
+                            <input type="text" placeholder="Enter Last Name.."
+                                        class="form-control" path="lastName" ng-model="$ctrl.user.lastName"></input>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label path="users.emailId">Email Id</label>
+                            <input type="text" placeholder="Enter Email ID.."
+                                        class="form-control" path="users.emailId" ng-model="$ctrl.user.users.emailId"></input>
+                            <errors path="users.emailId"></errors>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label path="customerPhone">Phone Number</label>
+                            <input type="text" placeholder="Enter Phone Number.."
+                                        class="form-control" path="customerPhone" ng-model="$ctrl.user.customerPhone"></input>
+                            <errors path="customerPhone"></errors>
+                        </div>
+                    </div>
+                    <hr>
+                    <div>
+                        <center>Shipping Address</center>
+                    </div>
+                    <div class="form-group">
+                        <label path="shippingAddress.address">Address</label>
+                        <textarea type="text" placeholder="Enter Shipping Address.."
+                                       class="form-control" path="shippingAddress.address" ng-model="$ctrl.user.shippingAddress.address"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label path="shippingAddress.city">City</label>
+                            <input type="text" placeholder="Enter Current City.."
+                                        class="form-control" path="shippingAddress.city" ng-model="$ctrl.user.shippingAddress.city"></input>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label path="shippingAddress.state">State</label>
+                            <input type="text" placeholder="Enter your State.."
+                                        class="form-control" path="shippingAddress.state" ng-model="$ctrl.user.shippingAddress.state"></input>
+                            <errors path="shippingAddress.state"></errors>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label path="shippingAddress.country">Country</label>
+                            <input type="text" placeholder="Enter your country.."
+                                        class="form-control" path="shippingAddress.country" ng-model="$ctrl.user.shippingAddress.country"></input>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label path="shippingAddress.zipcode">Zipcode</label>
+                            <input type="text" placeholder="Enter zipcode.."
+                                        class="form-control" path="shippingAddress.zipcode" ng-model="$ctrl.user.shippingAddress.zipcode"></input>
+                            <errors path="shippingAddress.zipcode"></errors>
+                        </div>
+                    </div>
+                    <hr>
+                    <div>
+                        <center>Billing Address</center>
+                    </div>
+                    <div class="form-group">
+                        <label path="billingAddress.address">Address</label>
+                        <textarea type="text" placeholder="Enter Billing Address.."
+                                       class="form-control" path="billingAddress.address" ng-model="$ctrl.user.billingAddress.address"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label path="billingAddress.city">City</label>
+                            <input type="text" placeholder="Enter your City.."
+                                        class="form-control" path="billingAddress.city" ng-model="$ctrl.user.billingAddress.city"></input>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label path="billingAddress.state">State</label>
+                            <input type="text" placeholder="Enter your state.."
+                                        class="form-control" path="billingAddress.state" ng-model="$ctrl.user.billingAddress.state"></input>
+                            <errors path="billingAddress.state"></errors>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label path="billingAddress.country">Country</label>
+                            <input type="text" placeholder="Enter your City.."
+                                        class="form-control" path="billingAddress.country" ng-model="$ctrl.user.billingAddress.country"></input>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label path="billingAddress.zipcode">Zipcode</label>
+                            <input type="text" placeholder="Enter Zipcode.."
+                                        class="form-control" path="billingAddress.zipcode" ng-model="$ctrl.user.billingAddress.zipcode"></input>
+                            <errors path="billingAddress.zipcode"></errors>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label path="users.password">Password</label>
+                            <input type="password" placeholder="********"
+                                        class="form-control" path="users.password" id="pass" ng-model="$ctrl.user.users.password"></input>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label>Confirm Password</label> <input type="password"
+                                                                   placeholder="********" class="form-control" id="confirmpass" />
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-lg btn-info"
+                                onclick="return Validate()">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Validating Password -->
+<script type="text/javascript">
+		function Validate() {
+		    console.log("Validate");
+			var password = document.getElementById("pass").value;
+			var confirmpass = document.getElementById("confirmpass").value;
+			if (password != confirmpass) {
+				alert("Password does Not Match.");
+				return false;
+			}
+			return true;
+		}
+	</script>
+</body>
+</html>

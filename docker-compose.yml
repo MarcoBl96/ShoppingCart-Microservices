@@ -1,0 +1,69 @@
+version: "3.9"
+services:
+    mariadb:
+        image: mariadb:10.7
+        ports:
+            - "3306:3306"
+        environment:
+            - MYSQL_ROOT_PASSWORD=password
+            - MYSQL_PASSWORD=password
+            - MYSQL_USER=user
+            - MYSQL_DATABASE=shoppingcart
+        volumes:
+            - ./db_data:/var/lib/mysql
+            - ./db_conf:/etc/mysql
+        command:
+            'mysqld --innodb-flush-method=fsync'
+    discovery-server:
+        image: shoppingcart/discovery-server
+        container_name: discovery-server
+        ports:
+            - "8761:8761"
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod
+    api-gateway:
+        image: shoppingcart/api-gateway
+        container_name: api-gateway
+        depends_on:
+            - "discovery-server"
+        ports:
+            - "8080:8080"
+        environment:
+            - eureka.client.serviceUrl.defaultZone=http://discovery-server:8761/eureka/
+        
+    product-services:
+        image: shoppingcart/product-service
+        container_name: product-service
+        depends_on:
+            - "discovery-server"
+            - "mariadb"
+        environment:
+            - eureka.client.serviceUrl.defaultZone=http://discovery-server:8761/eureka/
+            - spring.datasource.url=jdbc:mariadb://mariadb:3306/shoppingcart
+    user-services:
+        image: shoppingcart/user-service
+        container_name: user-service
+        depends_on:
+            - "discovery-server"
+            - "mariadb"
+        environment:
+            - eureka.client.serviceUrl.defaultZone=http://discovery-server:8761/eureka/
+            - spring.datasource.url=jdbc:mariadb://mariadb:3306/shoppingcart
+    cart-services:
+        image: shoppingcart/cart-service
+        container_name: cart-service
+        depends_on:
+            - "discovery-server"
+            - "mariadb"
+        environment:
+            - eureka.client.serviceUrl.defaultZone=http://discovery-server:8761/eureka/
+            - spring.datasource.url=jdbc:mariadb://mariadb:3306/shoppingcart
+    order-services:
+        image: shoppingcart/order-service
+        container_name: order-service
+        depends_on:
+            - "discovery-server"
+            - "mariadb"
+        environment:
+            - eureka.client.serviceUrl.defaultZone=http://discovery-server:8761/eureka/
+            - spring.datasource.url=jdbc:mariadb://mariadb:3306/shoppingcart

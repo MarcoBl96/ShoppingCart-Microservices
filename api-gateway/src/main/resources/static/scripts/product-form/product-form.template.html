@@ -1,0 +1,80 @@
+<form ng-submit="$ctrl.submitProductForm()" style="max-width: 25em;">
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-6 form-group">
+                <label path="productId">Product Id</label>
+                <input type="text"
+                            placeholder="Enter ProductId.." class="form-control"
+                            path="productId" disabled="true" ng-model="$ctrl.product.productId"></input>
+            </div>
+            <div class="col-sm-6 form-group">
+                <label path="productName">Product Name</label>
+                <input type="text"
+                            placeholder="Enter Product Name.." class="form-control"
+                            path="productName" ng-model="$ctrl.product.productName"></input>
+                <errors path="productName"></errors>
+            </div>
+        </div>
+        <div class="form-group">
+            <label path="productDescription">Product Description</label>
+            <textarea type="text"
+                           placeholder="Enter Product Description.." class="form-control"
+                           path="productDescription" ng-model="$ctrl.product.productDescription" ></textarea>
+        </div>
+        <div class="form-group">
+            <label path="productCategory">Product Category</label>
+            <div>
+            <label>
+                <input type="radio" value="Android"
+                       path="productCategory" ng-model="$ctrl.product.productCategory" >
+                <span>Android</span>
+            </label>
+            <label>
+                <input type="radio" value="Windows"
+                       path="productCategory" ng-model="$ctrl.product.productCategory">
+                <span>Windows</span>
+            </label>
+            <label>
+                <input type="radio" value="Linux"
+                       path="productCategory" ng-model="$ctrl.product.productCategory">
+                <span>Linux</span>
+            </label>
+            <label>
+                <input type="radio" value="Mac"
+                       path="productCategory" ng-model="$ctrl.product.productCategory">
+                <span>Mac</span>
+            </label>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-sm-4 form-group">
+                <label path="productManufacturer">Product Manufacturer</label>
+                <input type="text"
+                            placeholder="Enter Product Manufacurer.." class="form-control"
+                            path="productManufacturer" ng-model="$ctrl.product.productManufacturer"></input>
+            </div>
+            <div class="col-sm-4 form-group">
+                <label path="productPrice">Product Price</label>
+                <input type="text"
+                            placeholder="Enter Product Price.." class="form-control"
+                            path="productPrice" ng-model="$ctrl.product.productPrice"></input>
+                <errors path="productPrice"></errors>
+            </div>
+            <div class="col-sm-4 form-group">
+                <label path="unitStock">Number of Products</label>
+                <input type="text"
+                            placeholder="Number of Products.." class="form-control"
+                            path="unitStock" ng-model="$ctrl.product.unitStock"></input>
+            </div>
+        </div>
+        <div class="form-group">
+            <label path="productImage">Product Image</label>
+            <input type="file" path="productImage" ng-model="$ctrl.product.productImage"/>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-lg btn-info">Submit</button>
+        </div>
+    </div>
+</form>
+

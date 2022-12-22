@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cart-service
+  labels:
+    app: cart-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cart-service
+  template:
+    metadata:
+      labels:
+        app: cart-service
+    spec:
+      containers:
+        - name: product-service
+          image: gcr.io/shopping-cart-351917/shopping-cart/cart-service:v4
+          ports:
+            - containerPort: 8083
+          env:
+            - name: MARIADB_SERVER_ADDRESS
+              value: jdbc:mariadb://mariadb:3306/shoppingcart
+            - name: SPRING_PROFILES_ACTIVE
+              value: prod
